@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasySkills - Skill在线生成器</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ── Header ── -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo" id="logo-home" role="button" tabindex="0" title="返回首页">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">EasySkills</span>
+      </div>
+      <p class="header-sub">上传文档、链接或文字，一键生成可安装的Skill</p>
+    </div>
+  </header>
+
+  <!-- ── Main ── -->
+  <main class="main">
+
+    <!-- ===== 输入区域 ===== -->
+    <div id="section-input">
+
+      <div class="card">
+        <h2 class="card-title">📥 选择内容来源</h2>
+
+        <!-- 标签页 -->
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-tab="file" role="tab">📄 上传文件</button>
+          <button class="tab" data-tab="url"  role="tab">🔗 网页链接</button>
+          <button class="tab" data-tab="text" role="tab">📝 粘贴文本</button>
+        </div>
+
+        <!-- 文件上传 -->
+        <div id="tab-file" class="tab-panel active">
+
+          <!-- 支持格式标签 -->
+          <div class="format-chips">
+            <span class="format-chip">PDF</span>
+            <span class="format-chip">Word .docx</span>
+            <span class="format-chip">TXT</span>
+            <span class="format-chip">Markdown</span>
+            <span class="format-limit">最大 50 MB</span>
+          </div>
+
+          <div id="drop-zone" class="drop-zone">
+            <input type="file" id="file-input" accept=".pdf,.docx,.doc,.txt,.md" hidden>
+
+            <!-- 默认状态 -->
+            <div class="drop-inner" id="drop-inner">
+              <div class="drop-icon">📎</div>
+              <p class="drop-text">
+                拖拽文件到此处，或
+                <button class="link-btn" onclick="document.getElementById('file-input').click()">点击选择</button>
+              </p>
+            </div>
+
+            <!-- 解析进度状态 -->
+            <div class="upload-parsing hidden" id="upload-parsing">
+              <div class="parsing-file-row">
+                <span class="parsing-icon" id="parsing-icon">📄</span>
+                <div class="parsing-info">
+                  <span class="parsing-name" id="parsing-name"></span>
+                  <span class="parsing-status-text" id="parsing-status-text">准备中…</span>
+                </div>
+                <span class="parsing-pct" id="parsing-pct">0%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" id="progress-fill"></div>
+              </div>
+            </div>
+
+            <!-- 解析完成状态 -->
+            <div class="file-selected hidden" id="file-selected">
+              <span class="file-sel-icon">✅</span>
+              <span class="file-sel-name" id="file-sel-name"></span>
+              <span class="file-sel-size" id="file-sel-size"></span>
+              <button class="remove-btn" id="remove-file" title="移除">✕</button>
+            </div>
+          </div>
+
+          <div id="file-parse-status" class="parse-status hidden"></div>
+        </div>
+
+        <!-- 网页链接 -->
+        <div id="tab-url" class="tab-panel">
+          <div class="url-row">
+            <input type="url" id="url-input" class="input" placeholder="https://mp.weixin.qq.com/s/...  或任意网页链接">
+            <button id="fetch-btn" class="btn btn-secondary">抓取</button>
+          </div>
+          <div id="url-status" class="parse-status hidden"></div>
+        </div>
+
+        <!-- 粘贴文本 -->
+        <div id="tab-text" class="tab-panel">
+          <textarea id="text-input" class="textarea" rows="10"
+            placeholder="直接粘贴文章、文档、知识点、操作手册……&#10;&#10;内容越详细，生成的 Skill 越精准。"></textarea>
+          <div class="char-count" id="char-count">0 字</div>
+        </div>
+      </div>
+
+      <!-- 补充说明（可选） -->
+      <div class="card">
+        <h2 class="card-title">
+          ✏️ 补充说明
+          <span class="optional-badge">可选</span>
+        </h2>
+        <div class="field-stack">
+          <input type="text" id="skill-name" class="input" placeholder="Skill 名称（如：cooking-guide，留空则自动命名）">
+          <textarea id="skill-desc" class="textarea" rows="2"
+            placeholder="用途说明：这个 Skill 主要用于……（帮助 AI 更准确理解你的意图）"></textarea>
+        </div>
+      </div>
+
+      <!-- 模型选择 -->
+      <div class="card">
+        <h2 class="card-title">🤖 模型选择</h2>
+
+        <div class="mode-bar">
+          <button class="mode-btn active" id="mode-platform">🏠 使用平台模型</button>
+          <button class="mode-btn" id="mode-custom">🔑 自定义 API</button>
+        </div>
+
+        <!-- 平台模型 -->
+        <div id="panel-platform">
+          <div class="model-grid" id="model-grid">
+            <div class="model-loading">加载中…</div>
+          </div>
+        </div>
+
+        <!-- 自定义 API -->
+        <div id="panel-custom" class="hidden">
+          <div class="custom-api-form">
+            <div class="field-row">
+              <span class="field-label">API 格式</span>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="api-fmt" value="openai" checked> OpenAI 兼容
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="api-fmt" value="anthropic"> Anthropic 原生
+                </label>
+              </div>
+            </div>
+            <input type="password" id="custom-key" class="input" placeholder="API Key（sk-... 或 sk-ant-...）" autocomplete="off">
+            <input type="text" id="custom-url" class="input" placeholder="Base URL（留空使用官方默认）">
+            <input type="text" id="custom-model" class="input" placeholder="模型名称（如：gpt-4o 或 claude-sonnet-4-6）">
+          </div>
+        </div>
+      </div>
+
+      <!-- 平台模型调用上限提示（触发后显示） -->
+      <div id="quota-alert" class="quota-alert hidden">
+        <span class="quota-icon">⚠️</span>
+        <div class="quota-body">
+          <p class="quota-title">平台免费模型已达调用上限，无法继续生成</p>
+          <p class="quota-desc">请在下方「自定义 API」中填入您自己的 API Key 和模型名称后重试。</p>
+        </div>
+        <button class="quota-close" onclick="document.getElementById('quota-alert').classList.add('hidden')" title="关闭">✕</button>
+      </div>
+
+      <!-- 生成按钮 -->
+      <button id="generate-btn" class="btn btn-primary btn-large btn-full" disabled>
+        ✨ &nbsp;生成 Skill
+      </button>
+
+    </div><!-- /#section-input -->
+
+
+    <!-- ===== 进度区域 ===== -->
+    <div id="section-progress" class="hidden">
+      <div class="card">
+        <h2 class="card-title">⚙️ 正在生成 Skill…</h2>
+
+        <!-- 步骤条 -->
+        <div class="steps">
+          <div class="step" id="step-extract">
+            <div class="step-dot"></div>
+            <span class="step-label">解析内容</span>
+          </div>
+          <div class="step-connector"></div>
+          <div class="step" id="step-generate">
+            <div class="step-dot"></div>
+            <span class="step-label">AI 生成</span>
+          </div>
+          <div class="step-connector"></div>
+          <div class="step" id="step-package">
+            <div class="step-dot"></div>
+            <span class="step-label">打包完成</span>
+          </div>
+        </div>
+
+        <!-- 队列提示 -->
+        <div id="queue-box" class="queue-box hidden">
+          <div class="queue-icon">⏳</div>
+          <div class="queue-body">
+            <p class="queue-title" id="queue-title">服务繁忙，正在排队等待…</p>
+            <p class="queue-detail" id="queue-detail"></p>
+          </div>
+          <div class="queue-countdown" id="queue-countdown"></div>
+        </div>
+
+        <button id="cancel-btn" class="btn btn-ghost btn-full" style="margin-top:16px">取消</button>
+      </div>
+    </div><!-- /#section-progress -->
+
+
+    <!-- ===== 结果区域 ===== -->
+    <div id="section-result" class="hidden">
+      <div class="card result-card">
+        <div class="result-header">
+          <span class="result-emoji">🎉</span>
+          <div>
+            <h2 class="result-title" id="result-title">Skill 生成完成</h2>
+            <p class="result-summary" id="result-summary"></p>
+          </div>
+        </div>
+
+        <div class="result-file-row">
+          <div class="result-file-info">
+            <span class="file-badge">📦</span>
+            <span class="result-fname" id="result-fname"></span>
+            <span class="result-fsize" id="result-fsize"></span>
+          </div>
+          <div class="download-btns">
+            <button id="download-btn" class="btn btn-primary">⬇&nbsp; 下载 .skill</button>
+            <button id="download-zip-btn" class="btn btn-secondary">⬇&nbsp; 下载 .zip</button>
+          </div>
+        </div>
+
+        <!-- 安装平台说明 -->
+        <div class="platform-hints">
+          <div class="platform-hint">
+            <span class="ph-badge ph-claude">Claude Code</span>
+            <span class="ph-text">下载 <code>.skill</code>，拖入窗口或运行 <code>/skills install &lt;路径&gt;</code></span>
+          </div>
+          <div class="platform-hint">
+            <span class="ph-badge ph-other">OpenCode / Cursor / Codex / OpenClaw</span>
+            <span class="ph-text">下载 <code>.zip</code>，解压后将 <code>SKILL.md</code> 及 <code>references/</code> 放入项目或工具指定目录</span>
+          </div>
+        </div>
+
+        <!-- 预览 -->
+        <div class="preview-wrap">
+          <button id="preview-toggle" class="preview-toggle">▶ 预览 SKILL.md 内容</button>
+          <pre id="preview-content" class="preview-pre hidden"></pre>
+        </div>
+
+        <div class="result-actions">
+          <button id="restart-btn" class="btn btn-ghost">🔁 用相同内容重试</button>
+          <button id="new-btn" class="btn btn-secondary">＋ 生成另一个</button>
+        </div>
+      </div>
+    </div><!-- /#section-result -->
+
+  </main>
+
+  <footer class="footer">
+    <span class="footer-brand">EasySkills</span>
+    <span class="footer-divider"></span>
+    <span>Copyright &copy; 2026</span>
+    <span class="footer-divider"></span>
+    <a href="https://www.majiabin.com" target="_blank" rel="noopener" class="footer-link">www.majiabin.com</a>
+  </footer>
+
+</div><!-- /.page -->
+
+<!-- ── 本地库（由 setup.php 下载到 lib/ 目录，无需外部 CDN）── -->
+<script src="lib/mammoth.browser.min.js"></script>
+<script src="lib/jszip.min.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
