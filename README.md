@@ -15,7 +15,7 @@ EasySkills 是一个面向 AI Agent 生态的在线 Skill 生成器。用户可�
 
 ## 产品界面
 
-![EasySkills Homepage](./assets/screenshots/homepage.png)
+![EasySkills Homepage](./assets/homepage.png)
 
 ## 项目特点
 
