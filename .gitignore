@@ -1,0 +1,13 @@
+# Generated runtime dependencies
+lib/
+
+# Runtime task files
+tasks/active_*.json
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
