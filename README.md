@@ -1,5 +1,14 @@
 # EasySkills
 
+[English](./README_EN.md)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-black.svg)](./LICENSE)
+[![PHP](https://img.shields.io/badge/PHP-7.4%2B-FF5C1A.svg)](https://www.php.net/)
+[![Status](https://img.shields.io/badge/Status-Open%20Source-success.svg)](https://github.com/majiabin2020/skillforge)
+[![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-ff8a44.svg)](./CONTRIBUTING.md)
+
+![EasySkills Cover](./assets/cover.svg)
+
 EasySkills 是一个面向 AI Agent 生态的在线 Skill 生成器。用户可以上传文档、抓取网页，或直接粘贴文本内容，系统会自动提取关键信息，调用大模型生成可安装的 `SKILL.md` 结构，并打包为可下载的 `.skill` 或 `.zip` 文件。
 
 这个项目采用纯前端 + PHP 代理的轻量架构，适合部署在常见虚拟主机、宝塔面板或普通 PHP Web 环境中。对于扫描版 PDF，还内置了基于 Tesseract.js 的本地 OCR 流程，尽量减少对外部服务的依赖。
@@ -237,4 +246,4 @@ location ~* \.traineddata\.gz$ {
 
 ## License
 
-当前仓库尚未附带 License 文件。正式开源前，建议补充合适的开源许可证，例如 MIT License。
+本项目基于 [MIT License](./LICENSE) 开源发布。

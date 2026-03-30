@@ -1,0 +1,61 @@
+<svg width="1280" height="640" viewBox="0 0 1280 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="72" y1="48" x2="1184" y2="592" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF4EF"/>
+      <stop offset="1" stop-color="#F5F5F5"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="180" y1="120" x2="1014" y2="540" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF5C1A"/>
+      <stop offset="1" stop-color="#FF8A44"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="1280" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="28" flood-color="#000000" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="640" rx="32" fill="url(#bg)"/>
+  <circle cx="1120" cy="112" r="168" fill="#FFE0D0"/>
+  <circle cx="1040" cy="548" r="188" fill="#F0F0F0"/>
+  <circle cx="176" cy="544" r="132" fill="#FFF0E8"/>
+
+  <g filter="url(#shadow)">
+    <rect x="88" y="84" width="1104" height="472" rx="28" fill="#FFFFFF"/>
+  </g>
+
+  <rect x="128" y="128" width="194" height="56" rx="18" fill="#0A0A0A"/>
+  <text x="160" y="164" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">EasySkills</text>
+
+  <text x="128" y="244" fill="#0A0A0A" font-family="Segoe UI, Arial, sans-serif" font-size="68" font-weight="800">Turn docs into installable Skills</text>
+  <text x="128" y="296" fill="#4A4A4A" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="500">Upload files, fetch web pages, or paste text. Generate SKILL.md packages for AI agents.</text>
+
+  <g>
+    <rect x="128" y="356" width="152" height="40" rx="20" fill="#FFF4EF" stroke="#FFD4BF"/>
+    <text x="159" y="382" fill="#E04D12" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">PHP Proxy</text>
+
+    <rect x="296" y="356" width="148" height="40" rx="20" fill="#FFF4EF" stroke="#FFD4BF"/>
+    <text x="330" y="382" fill="#E04D12" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">PDF + OCR</text>
+
+    <rect x="460" y="356" width="170" height="40" rx="20" fill="#FFF4EF" stroke="#FFD4BF"/>
+    <text x="494" y="382" fill="#E04D12" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">No Build Tools</text>
+
+    <rect x="646" y="356" width="196" height="40" rx="20" fill="#FFF4EF" stroke="#FFD4BF"/>
+    <text x="679" y="382" fill="#E04D12" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Agent Skill Package</text>
+  </g>
+
+  <g>
+    <rect x="844" y="150" width="288" height="270" rx="24" fill="#0F0F10"/>
+    <rect x="876" y="186" width="174" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.92"/>
+    <rect x="876" y="222" width="212" height="12" rx="6" fill="#A3A3A3"/>
+    <rect x="876" y="252" width="188" height="12" rx="6" fill="#A3A3A3"/>
+    <rect x="876" y="300" width="222" height="84" rx="18" fill="url(#accent)"/>
+    <text x="908" y="349" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="32" font-weight="800">SKILL.md</text>
+  </g>
+
+  <g>
+    <rect x="820" y="438" width="340" height="72" rx="22" fill="#FFF4EF" stroke="#FFD4BF"/>
+    <text x="854" y="483" fill="#B45309" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">OpenCode / Cursor / Codex / OpenClaw</text>
+  </g>
+
+  <text x="128" y="492" fill="#0A0A0A" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Open source by majiabin2020</text>
+  <text x="128" y="530" fill="#737373" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="500">Use this image as the repository social preview or README hero asset.</text>
+</svg>
