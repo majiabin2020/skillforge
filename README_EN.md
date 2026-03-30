@@ -13,6 +13,10 @@ EasySkills is an online Skill generator for AI agent ecosystems. It lets users u
 
 The project uses a lightweight frontend + PHP proxy architecture, making it suitable for shared hosting, BT Panel deployments, and simple PHP web environments. For scanned PDFs, it also includes a local OCR workflow based on Tesseract.js.
 
+## Product Screenshot
+
+![EasySkills Homepage](./assets/screenshots/homepage.png)
+
 ## Highlights
 
 - Three input modes: file upload, web page fetch, and pasted text
